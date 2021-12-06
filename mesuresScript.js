@@ -65,7 +65,7 @@ function getData() {
         xhr.send();
     };
 
-    getJSON('/data/stats_Now.json', function(err, data) {
+    getJSON('data/stats_Now.json', function(err, data) {
         if (err != null) {
             console.error(err);
         } else {
