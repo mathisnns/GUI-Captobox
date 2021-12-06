@@ -21,6 +21,50 @@ var displayData = false;
 function init() {
 	checkDeviceType();
 
+	if (location.hash === '#1jour') {
+		day = 1;
+		url = "24hours/24hStats";
+		nbValue = 72;
+		if (deviceType) {
+			document.getElementById("boutonComposant").style.display = "block";
+			document.getElementById("indicateur").textContent = "Relevé sur 24 heures :";
+		} else {
+			displayCharts();
+			document.getElementById("indicateur").textContent = "Relevé sur 24 heures :";
+		}
+	}
+
+	else if (location.hash === '#3jours') {
+		console.log("3 jours");
+		day = 3;
+		url = "3days/3daysStats";
+		nbValue = 72;
+		if (deviceType) {
+			document.getElementById("boutonComposant").style.display = "block";
+			document.getElementById("indicateur").textContent = "Relevé sur 3 jours :";
+		} else {
+			displayCharts();
+			document.getElementById("indicateur").textContent = "Relevé sur 3 jours :";
+		}
+	}
+
+	else if (location.hash === '#7jours') {
+		console.log("7 jours");
+		day = 7;
+		url = "7days/7daysStats";
+		nbValue = 72;
+		if (deviceType) {
+			document.getElementById("boutonComposant").style.display = "block";
+			document.getElementById("indicateur").textContent = "Relevé sur 7 jours :";
+		} else {
+			displayCharts();
+			document.getElementById("indicateur").textContent = "Relevé sur 7 jours :";
+		}
+	}
+	else{
+		location.hash = "";
+	}
+
 
 
 	document.getElementById("circle").style.display = "none";
