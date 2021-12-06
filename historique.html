@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CaptoBox</title>
+    <meta charset="utf-8">
+
+    <script src="apexcharts.js"></script>
+    <script src="deviceType.js"></script>
+
+    <script src="optionsCharts.js"></script>
+    <script src="scriptHistorique2.js"></script>
+
+    <style>
+        .circle {
+            margin: 200px auto 200px;
+            width: 275px;
+            height: 275px;
+            border-radius: 50%;
+            border: 10px solid transparent;
+            border-top-color: #bcc3ca;
+            border-bottom-color: #bcc3ca;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+</head>
+
+<div class="circle" id="circle"></div>
+
+<body onload="init()">
+
+    <div class="circle" id="circle"></div>
+
+    <h1 id="error" style="margin: 0px auto 0px; text-align: center;"></h1>
+
+    <header class="hidden">
+        <h1> CaptoBox : </h1>
+        <nav>
+            <ul>
+                <li><a href="/index.html">Mesures</a></li>
+                <li id="on"><a href="/AJAXhistorique.html">Historique</a></li>
+                <li><a href="AJAXinfos.html">Infos</a></li>
+                <li class="rightMenu"><a href="AJAXsetup.html" class="rightMenu">Parametres</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hidden">
+        <h2 class="centered">CaptoBox :</h2>
+
+        <div id="boutonHistorique">
+            <p>Afficher les données sur :</p>
+
+            <hr>
+            <a class="buttonHist" href="#1jour">1 jour</a>
+            <a class="buttonHist" href="#3jours">3 jours</a>
+            <a class="buttonHist" href="#7jours">7 jours</a>
+            <hr>
+        </div>
+
+        <div style="width: 90%; margin: auto;" id="boutonComposant">
+            <p>Afficher les données de :</p>
+            <a href="#mono">Monoxyde</a>
+            <a href="#co2">CO2</a>
+            <a href="#cov">COV</a>
+            <a href="#pm">Particules</a>
+            <a href="#temp">Temperature</a>
+            <a href="#hum">Humidité</a>
+            <a href="#press">Pression</a>
+        </div>
+
+        <div id="courbes">
+            <a id="boutonRetour" class="buttonHist" href="/AJAXhistorique.html">retour</a>
+            <br>
+            <br>
+
+            <h3 id="indicateur" style="display: none;">releve sur 24h</h3>
+
+            <hr>
+
+            <div id="chartsDiv" style="display : none">
+
+                <div class="charts" id="chartMonoCanva">
+                    <br>
+
+                    <div id="chartMono"></div>
+                </div>
+
+                <div class="charts" id="chartCo2Canva">
+                    <br>
+                    <hr>
+                    <div id="chartCo2"></div>
+                </div>
+
+                <div class="charts" id="chartCovCanva">
+                    <br>
+                    <hr>
+                    <div id="chartCov"></div>
+                </div>
+
+                <div class="charts" id="chartPmCanva">
+                    <br>
+                    <hr>
+                    <div id="chartPm"></div>
+                </div>
+
+                <div class="charts" id="chartHumCanva">
+                    <br>
+                    <hr>
+                    <div id="chartHum"></div>
+                </div>
+
+                <div class="charts" id="chartTempCanva">
+                    <br>
+                    <hr>
+                    <div id="chartTemp"></div>
+                </div>
+
+                <div class="charts" id="chartPressCanva">
+                    <br>
+                    <hr>
+                    <div id="chartPress"></div>
+                </div>
+
+            </div>
+
+            <div id="progress" class="centered">
+                <h3>Récupération des données...</h3>
+                <div style="margin: 50px auto 50px;" class="circle"></div>
+                <h3 id="progressPourcentage"></h3>
+            </div>
+
+        </div>
+
+        <div id="mobile" class="centered">
+            <hr>
+            <p style="width: 80%; margin: auto; text-align: center;">Touchez la courbe ou faites glisser votre doigts pour afficher les données.</p>
+        </div>
+
+        <div style="text-align: center;">
+            <div style="width: 100%" id="zonededanger">
+                <hr style="width: 80%; margin: auto;">
+                <br>
+                <span>Afficher zone de danger :</span>
+                <input type="checkbox" id="showZone" name="interest" onclick="showZone()" value="coding" checked>
+            </div>
+
+        </div>
+
+        <br>
+
+        <a style="text-decoration: underline; font-size: 100%;" href="#avertissement">Avertissement :</a>
+        <div id="avertissement" style="display: none;">
+
+            <h4>Les données mesurées par la Captobox sont à titre indicatif. Pour pouvoir respecter le cahier des charges ( taille, coût ...), les capteurs choisit pour ce projet ne sont pas d'une grande précision.
+            </h4>
+            <a style="text-decoration: underline;" href="#close">fermer</a>
+        </div>
+
+
+    </section>
+
+    <footer style="text-align: center;" class="hidden">
+        <a target="_blank" href="https://www.lespetitsdebrouillardsoccitanie.org/actualites/">
+            <h2 STYLE="color: #FFFFFF;">Les Petits Débrouillards</h2>
+        </a>
+    </footer>
+
+</body>
+
+<!--
+        .
+       ":"
+     ___:____     |"\/"|
+   ,'        `.    \  /
+   |  O        \___/  |
+ ~^~^~^~^~^~^~^~^~^~^~^~^~
+
+      By MathisNns
+
+-->
+
+</html>

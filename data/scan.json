@@ -1,0 +1,35 @@
+[
+    {
+        "rssi": "+ String(WiFi.RSSI(i));",
+        "ssid" : "wifi 1",
+        "bssid" : "aytrzeryt",
+        "channel" : 7,
+        "secure" : "wpa",
+        "hidden" : "true"
+    },
+    {
+        "rssi": "zedzed",
+        "ssid" : "wifi 2",
+        "bssid" : "aytrzeryt",
+        "channel" : 7,
+        "secure" : "wpa",
+        "hidden" : "true"
+    },
+    {
+        "rssi": "zedzed",
+        "ssid" : "wifi 3",
+        "bssid" : "aytrzeryt",
+        "channel" : 7,
+        "secure" : "wpa",
+        "hidden" : "true"
+    },
+    {
+        "rssi": "zedzed",
+        "ssid" : "wifi 4",
+        "bssid" : "aytrzeryt",
+        "channel" : 7,
+        "secure" : "wpa",
+        "hidden" : "true"
+    }
+
+]

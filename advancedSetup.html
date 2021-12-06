@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CaptoBox</title>
+    
+    <meta charset="utf-8" />
+    <script src="scriptAdvancedSetup.js"></script>
+    <script src="deviceType.js"></script>
+</head>
+
+<body onload="init()" id="setup" STYLE="display: none;">
+    <header class="hidden">
+        <h1>
+            CaptoBox :
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="/index.html">Mesures</a></li>
+                <li><a href="/AJAXhistorique.html">Historique</a></li>
+                <li><a href="/AJAXinfos.html">Infos</a></li>
+                <li><a href="/AJAXsetup.html" class="rightMenu">Parametres</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hidden">
+
+        <div class="circle" id="circle"></div>
+
+        <h1 id="error" style="margin: 0px auto 0px; text-align: center;"></h1>
+
+        <div style="text-align: center;">
+            <h2>Advanced Setup :</h2>
+            <div>
+                <hr>
+                <h3>device type : </h3>
+                <h4 id="deviceType"></h4>
+                <hr>
+                <div>
+                    <h3>
+                        RTC :
+                    </h3>
+
+                    <h5>Current value :</h5>
+
+                    <h4 id="currentTime">12:12:56 3/8/02</h4>
+
+                    <div class="change">
+                        <h5>Change value :</h5>
+                        <input type="date" id="RTC_date" name="RTC_time" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}">
+                        <input type="time" id="RTC_time" name="RTC_time" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}">
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div>
+                    <h3>
+                        FTP :
+                    </h3>
+
+                    <h5>Current value :</h5>
+
+                    <h4 id="currentFTP_ID">ID : Captobox</h4>
+                    <h4 id="currentFTP_PWD">Password : admin</h4>
+
+                    <div class="change">
+                        <h5>Change value :</h5>
+                        <input type="text" id="FTP_ID" placeholder="ID">
+                        <input type="text" id="FTP_PWD" placeholder="Password">
+                    </div>
+                </div>
+
+                <hr>
+
+                <div>
+                    <h3>
+                        NTP :
+                    </h3>
+
+                    <h5>Current value :</h5>
+
+                    <h4 id="currentServeur">Server : europe.pool.ntp.org</h4>
+
+                    <div class="change">
+                        <h5>Change value :</h5>
+                        <input type="text" id="serverAddress" placeholder="Server Adresse">
+                    </div>
+                </div>
+
+                <hr>
+
+                <div>
+                    <h3>
+                        OTA :
+                    </h3>
+
+                    <h5>Current value :</h5>
+
+                    <h4 id="currentOTA_ID">ID : Captobox</h4>
+                    <h4 id="currentOTA_PWD">Password : admin</h4>
+
+                    <div class="change">
+                        <h5>Change value :</h5>
+                        <input type="text" id="OTA_ID" placeholder="ID">
+                        <input type="text" id="OTA_PWD" placeholder="Password">
+                    </div>
+                </div>
+
+                <hr>
+
+                <div>
+                    <h3>
+                        Owner :
+                    </h3>
+
+                    <h5>Current value :</h5>
+
+                    <h4 id="currentOwner">Owner : Les Petits Debrouillards </h4>
+                    <h4 id="currentKey">Key : 656dee02b17670da1a9f1f5d95315269</h4>
+
+                    <div class="change">
+                        <h5>Change value :</h5>
+                        <input type="text" id="owner" placeholder="owner">
+                        <input type="text" id="key" placeholder="key">
+                    </div>
+                </div>
+
+                <hr>
+
+                <div>
+                    <h3>
+                        Upload file :
+                    </h3>
+
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="file" name="name">
+                        <br><br>
+                        <input class="button" type="submit" value="Upload">
+                    </form>
+                </div>
+
+                <hr>
+
+                <div style="text-align: center;">
+                    <a href="#42">
+                        <h4>La réponse à la vie</h4>
+                    </a>
+
+                    <div>
+                        <video id="video" src="src/video.mp4" style="width: 500px; display : none; "></video>
+                    </div>
+
+                </div>
+
+                <hr>
+
+            </div>
+
+            <br>
+
+            <button id="change button" type="button" class="btn btn-danger" onclick="change_value()">Change
+                value</button>
+            <button id="save button" type="button" class="btn btn-danger" style="display : none" onclick="write_config()">Save changes</button>
+
+    </section>
+
+    <footer style="text-align: center;" class="hidden">
+        <a target="_blank" href="https://www.lespetitsdebrouillardsoccitanie.org/actualites/">
+            <h2 STYLE="color: #FFFFFF;">Les Petits Débrouillards</h2>
+        </a>
+    </footer>
+
+</body>
+
+<!--
+        .
+       ":"
+     ___:____     |"\/"|
+   ,'        `.    \  /
+   |  O        \___/  |
+ ~^~^~^~^~^~^~^~^~^~^~^~^~
+
+      By MathisNns
+
+-->
+
+</html>

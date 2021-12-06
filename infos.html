@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CaptoBox</title>
+    
+    <meta charset="utf-8" />
+
+    <script src="scriptInfos2.js"></script>
+    <script src="deviceType.js"></script>
+
+    <style>
+        .circle {
+            margin: 200px auto 200px;
+            width: 275px;
+            height: 275px;
+            border-radius: 100%;
+            border: 10px solid transparent;
+            border-top-color: #bcc3ca;
+            border-bottom-color: #bcc3ca;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body id="informations" onload="loadImg()" class="hidden">
+
+    <h1 id="error" style="margin: 0px auto 0px; text-align: center;"></h1>
+
+    <div class="circle" id="circle"></div>
+
+    <header class="hidden">
+        <h1>
+            CaptoBox :
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="/index.html">Mesures</a></li>
+                <li ><a href="/AJAXhistorique.html">Historique</a></li>
+                <li id="on"><a href="AJAXinfos.html">Infos</a></li>
+                <li class="rightMenu"><a href="AJAXsetup.html" class="rightMenu">Parametres</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hidden">
+
+        <div class="infos">
+
+            <div style="display: inline-block; text-align: center; width: 100%;">
+                <h2 class="centered">Les composants mesurés :</h2>
+                <P style="width: 100%; height: 50%;">
+                    Cette CaptoBox est capable de mesurer la présence de certains composant dans l’air de votre maison, mais quels sont ces composants ?
+                </P>
+            </div>
+
+            <hr>
+
+            <div id="mono" class="content">
+                <p>
+                    <h3 class="centered" style="font-weight: bold;">Le monoxyde de carbone :</h3>
+                    <br>
+                    <h4 style="font-weight: bold;">Définition :</h4>
+
+                    <p>
+                        <span> Incolore et inodore, le monoxyde de carbone est </span> <span style="font-weight: bold;">toxique
+                        et potentiellement mortel.</span> Il résulte d’une combustion incomplète, et ce quel que soit le combustible utilisé : bois, butane, charbon, essence, fuel, gaz naturel, pétrole, propane. Il vient des appareils de chauffage ou
+                        de cuisson qui ne fonctionnent pas bien ou qui sont mal utilisés.
+                    </p>
+                    <p>
+                        Le monoxyde de carbone est un gaz très dangereux car il est à l’origine de centaines de décès chaque années en France. Quand on le respire, il peut tuer en moins d’une heure.
+                    </p>
+                    <p>
+                        Il a pour formule moléculaire CO, car il est composé d’un atome d’oxygène (O), et d’un atome de carbone (C). C’est pour cela qu’on l’appel le monoxyde de carbone, en comparaison à son cousin, le dioxyde de carbone, qui lui possède deux atomes de carbones
+                        (CO2).
+                    </p>
+
+                    <h4 style="font-weight: bold;">Effets sur la santé :</h4>
+
+                    <p>
+                        La toxicité du monoxyde dépend de la dose absorbée (il s’agit toujours et exclusivement d’une absorption respiratoire). Il pénètre très librement et très rapidement jusqu’aux alvéoles pulmonaires, de sorte que la quasi-totalité inhalé est absorbée dans
+                        le sang.
+                    </p>
+                    <p>
+
+                        <ul type="disk">
+                            <li>5000 PPM pendant 20 minutes = décès </li>
+                            <li>2000 PPM pendant 3 heures = coma</li>
+                            <li>1000 PPM pendant 2 heures = perte de connaissance brève</li>
+                            <li>400 – 500 PPM pendant une heure ou 100 PPM pendant plusieurs = pas de signe clinique</li>
+                        </ul>
+                        <div>( PPM = « Parti Par Million », un millionième )</div>
+                    </p>
+
+                    <p>
+                        <div>Intoxication légère :</div>
+                        <ul type="disk">
+                            <li>Maux de tête</li>
+                            <li>Vertiges</li>
+                            <li>Nausées, vomissements</li>
+                            <li>Palpitations</li>
+                            <li>Douleurs ou oppressions thoraciques</li>
+                        </ul>
+                    </p>
+
+                    <p>
+                        La valeur limite d'exposition au monoxyde de carbone est de <span style="font-weight: bold;">50ppm.</span>
+                    </p>
+                    <h4>Pour plus d'infos :</h4>
+                    <a target="_blank" href="https://www.gouvernement.fr/risques/les-dangers-du-monoxyde-de-carbone">
+                        <div>www.gouvernement.fr</div>
+                    </a>
+                    <a target="_blank" href="https://www.respire-asso.org/monoxyde-de-carbone-co/">
+                        <div>www.respire-asso.org</div>
+                    </a>
+
+                </p>
+                <hr>
+            </div>
+
+            <div id="co2" class="content">
+                <p>
+                    <h3 class="centered">Le dioxyde de carbone :</h3>
+                    <h4 style="font-weight: bold;">Définition :</h4>
+
+                    <p>
+                        Le dioxyde de carbone ( CO2 ), aussi appelé gaz carbonique, est un gaz incolore, inodore et ininflammable.
+                    </p>
+                    <p>
+                        Il est composé d'un atome de carbone ( C ) et de deux atomes d'oxygene ( O ), formant donc le CO2. Il ne faut pas le confondre avec son cousin, le monoxyde de carbone ( CO ), qui lui ne possede qu'un seul atome d'oxygene ( mono ), et qui est bien plus
+                        dangereux.
+                    </p>
+                    <p>
+                        Il représente 77% des émissions de gaz à effets de serre (GES) d’origine humaine. Il résulte essentiellement de la combustion des énergies fossiles et du changement d’utilisation des sols (agriculture et déforestation). Il est surtout issu du secteur
+                        des transports (combustion de carburants), de l’industrie (utilisation d’énergies fossiles) et de l’habitat (utilisation d’énergie pour le chauffage, l’éclairage, …).
+                    </p>
+                    <p>
+                        L’air contient aujourd’hui environ 0,06 % de CO2 ( 600ppm ).
+                    </p>
+                    <h4 style="font-weight: bold;">Effets sur la santé :</h4>
+                    <p>
+                        Il est inoffensif à basse concentration mais il a des effets dangereux (perte de conscience, asphyxie), voir mortel, quand les concentrations dans l’air dépassent 5 ou 8%.
+                    </p>
+                    <p>
+                        La valeur limite d’exposition maximale sur une durée de 15 minutes est de 3 % ( 30 000ppm ). Cette valeur ne doit jamais être dépassée. Au-delà, les effets sur la santé sont d’autant plus graves que la teneur en CO2 augmente :
+                    </p>
+                    <ul type="disk">
+                        <li>3 % : l’amplitude respiratoire augmente.</li>
+                        <li>4 % : la fréquence respiratoire s’accélère.</li>
+                        <li>10 % : troubles visuels, tremblements et sueurs.</li>
+                        <li>15 % : perte de connaissance brutale.</li>
+                        <li>25 % : arrêt respiratoire, décès.</li>
+                    </ul>
+                    <p>
+                        La valeur limite ou niveau maximum qui est considérée sans danger pour un adulte en bonne santé durant une journée de travail est de <span style="font-weight: bold;">0.5% (5,000 ppm).</span>
+                    </p>
+
+                    <h4 style="font-weight: bold;">Pour plus d'infos :</h4>
+                    <a target="_blank" href="https://www.respire-asso.org/dioxyde-de-carbone-co2/">
+                        <div>www.respire-asso.org</div>
+                    </a>
+                    <a target="_blank" href="https://hydrokube.be/le-co2-est-il-dangereux/">
+                        <div>www.hydrokube.be</div>
+                    </a>
+
+                </p>
+                <hr>
+            </div>
+
+            <div id="cov" class="content">
+                <p>
+                    <h3 class="centered">Les composés organiques volatiles :</h3>
+                    <h4 style="font-weight: bold;">Définition :</h4>
+
+                    <p>
+                        Les composés organiques volatils (COV) sont des substances qui contiennent toutes l’élément chimique carbone (C). Ils sont présents dans l’atmosphère sous forme gazeuse, en raison de leur point d’ébullition bas. Le méthane (CH4), qui a un impact important
+                        sur le climat, est particulièrement abondant.
+                    </p>
+
+                    <p>
+                        Les composés organiques volatils sont souvent présents dans les peintures, vernis et produits de nettoyage. Comme ils s’évaporent rapidement, ils constituent tout particulièrement un risque pour la santé dans les espaces fermés.
+                    </p>
+
+                    <p>
+                        Afin d’éviter toute menace physique par les COV, il convient de n'utiliser que des produits sans solvant pour le ménage.
+                    </p>
+
+                    <h4 style="font-weight: bold;">Effets sur la santé :</h4>
+
+                    <p>
+                        Les COV irritent le nez et la gorge, peuvent causer des réactions cutanées allergiques, des difficultés respiratoires, de la fatigue, des maux de tête et de l’asthme. Le benzène, représentant des COV le plus connu, peut provoquer la leucémie.
+                    </p>
+
+                    <p>
+                        La limite à ne pas depasser est de : <span style="font-weight: bold;">300 ppb</span>.
+                    </p>
+
+                    <h4 style="font-weight: bold;">Pour plus d'infos :</h4>
+                    <a target="_blank" href="https://www.respire-asso.org/composes-organiques-volatiles-cov/">
+                        <div>www.respire-asso.org</div>
+                    </a>
+                    <a target="_blank" href="https://www.liguepulmonaire.ch/fileadmin/user_upload/LLS/01_MetaNavigation/01_UeberUns/Publikationen/Pdf_Franzoesisch/VOC_f.pdf">
+                        <div>www.liguepulmonaire.ch</div>
+                    </a>
+
+                </p>
+                <hr>
+            </div>
+
+            <div id="pm" class="content">
+                <p>
+                    <h3 class="centered">Les particules en suspention :</h3>
+                    <h4 style="font-weight: bold;">Définition :</h4>
+
+                    <p>
+                        Les particules en suspension (notées « PM » en anglais pour « Particulate matter ») sont d’une manière générale les fines particules solides portées par l’eau ou solides et/ou liquides portées par l’air (Wikipédia).
+                    </p>
+
+                    <p>Pour faire simple, les particules fines, c’est de la poussière. Dans le cas de la pollution de l’air, ces poussières sont souvent issues de combustions qui ne sont pas totales. Elles génèrent ce qu’on appelle des imbrûlés. Quand on
+                        voit la fumée sortir du cheminée, d’un pot d’échappement ou quand on recrache de la fumée de cigarettes, c’est parce qu’il y a énormément de particules, de plus ou moins petites tailles.
+                    </p>
+                    <p>
+                        Les particules sont d’origines anthropiques (humaines) et naturelles.
+                    </p>
+                    <ul type="disk">
+                        <li>Les particules d’origine naturelle proviennent principalement d’éruptions volcaniques et de l’érosion éolienne naturelle ou issues de l’avancée des déserts (parfois d’origine anthropique), les incendies et feux de végétation.</li>
+                        <li>Les activités humaines, telles que le chauffage (notamment au bois), la combustion de combustibles fossiles dans les véhicules, les centrales thermiques et de nombreux procédés industriels en génèrent également d’importantes quantités.
+                            Elle sont en augmentation nette depuis deux siècles.
+                        </li>
+                    </ul>
+
+                    <h4 style="font-weight: bold;">Effets sur la santé :</h4>
+                    <p>
+                        Les particules fines pénètrent en profondeur dans les poumons. Elles peuvent être à l’origine d’inflammations, et de l’aggravation de l’état de santé des personnes atteintes de maladies cardiaques et pulmonaires. De plus, elles peuvent transporter des
+                        composés cancérigènes absorbés sur leur surface jusque dans les poumons.
+                    </p>
+
+                    <p>
+                        La limite a ne pas depasser est de : <span style="font-weight: bold;">30 µg/m3</span>.
+                    </p>
+
+
+                    <h4 style="font-weight: bold;">Pour plus d'infos :</h4>
+                    <a target="_blank" href="https://www.respire-asso.org/particules-en-suspension-pm10-pm-25/">
+                        <div>www.respire-asso.org</div>
+                    </a>
+                </p>
+                <hr>
+            </div>
+
+            <div id="hum" class="content">
+                <p>
+
+                    <h3 class="centered">L'Humidité :</h3>
+                    <h4 style="font-weight: bold;">Définition :</h4>
+
+                    <p>
+                        Les moisissures sont des champignons microscopiques qui se développent dans un environnement humide. Aussi les retrouve-t-on dans les cuisines, les salles de bain, les lingeries, sur les appuis de fenêtres, les murs, les serviettes, les tapis, etc. Elles
+                        se présentent sous forme de taches de couleur noire, verte ou blanche, selon le type de moisissure et dégagent souvent une odeur de moisi ou de terre. Ces moisissures libèrent des spores microscopiques dans l’air. Des spores qui
+                        peuvent être inhalés et entraîner des dommages pour la santé.
+                    </p>
+
+                    <h4 style="font-weight: bold;">Effets sur la santé :</h4>
+
+                    <p>
+                        Un air intérieur humide et propice aux moisissures peut entraîner une irritation des yeux, du nez et de la gorge, et une sensibilité accrue aux infections respiratoires . On observe aussi plus de toux et de mucosités, ainsi qu’un plus grand nombre de
+                        réactions allergiques. Différentes études ont montré que le risque de toux et d’asthme est doublé chez l’enfant si l’air intérieur de son logement contient des moisissures.
+                    </p>
+                    <p>
+                        Pour un environement sain, le taux d'humidité doit se trouver <span style="font-weight: bold;">entre
+                        40%
+                        et 60%</span>
+                    </p>
+                    <h4 style="font-weight: bold;">Pour plus d'infos :</h4>
+                    <a target="_blank" href="https://www.francehumidite.com/humidite/effets-humidite-sante-270">
+                        <div>www.francehumidite.com</div>
+                    </a>
+                </p>
+                <hr>
+            </div>
+
+        </div>
+
+        </div>
+
+        <table id="pcInfoMenu" class="centered" style="font-weight: bold; display: none;">
+
+            <td class="centered">
+                <a href="#mono1">
+                    <div>
+                        <img id="img1" src="" height="155">
+                    </div>
+                    <h3>Monoxyde</h3>
+                </a>
+            </td>
+            <td class="centered">
+                <a href="#co21">
+                    <div>
+                        <img id="img2" src="" height="155">
+                    </div>
+                    <h3>CO2</h3>
+                </a>
+            </td>
+            <td class="centered">
+                <a href="#cov1">
+                    <div>
+                        <img id="img3" src="" height="155">
+                    </div>
+                    <h3>COV</h3>
+                </a>
+            </td>
+            <td class="centered">
+                <a href="#pm1">
+                    <div>
+                        <img id="img4" src="" height="155">
+                    </div>
+                    <h3>Particules</h3>
+
+                </a>
+            </td>
+            <td class="centered">
+                <a href="#hum1">
+                    <div>
+                        <img id="img5" src="" height="155">
+                    </div>
+                    <h3>Humidité</h3>
+                </a>
+            </td>
+
+        </table>
+
+        <div id="phoneInfoMenu" style="display: none;">
+            <table class="centered" style="font-weight: bold;">
+
+                <td class="centered">
+                    <a href="#mono1">
+                        <div id="imgMono">
+                            <img id="img6" src="">
+                        </div>
+                        <h3>Monoxyde</h3>
+                        <br>
+                    </a>
+                </td>
+                <td class="centered">
+                    <a href="#co21">
+                        <div>
+                            <img id="img7" src="">
+                        </div>
+                        <h3>CO2</h3>
+                        <br>
+                    </a>
+                </td>
+            </table>
+
+            <table class="centered" style="font-weight: bold">
+                <td class="centered">
+                    <a href="#cov1">
+                        <div>
+                            <img id="img8" src="">
+                        </div>
+                        <h3>COV</h3>
+                        <br>
+                    </a>
+                </td>
+                <td class="centered">
+                    <a href="#pm1">
+                        <div>
+                            <img id="img9" src="">
+                        </div>
+                        <h3>Particules</h3>
+                        <br>
+                    </a>
+                </td>
+            </table>
+
+            <table style="font-weight: bold">
+                <td class="centered">
+                    <a href="#hum1">
+                        <div>
+                            <img id="img10" src="">
+                        </div>
+                        <h3>Humidité</h3>
+                        <br>
+                    </a>
+                </td>
+            </table>
+        </div>
+
+        <hr>
+
+        <a href="AJAXloader.html#infosCapto">
+            <div id="capto" class="centered">
+                <br>
+                <h2>Informations sur la CaptoBox :</h2>
+            </div>
+
+            <div class="card" class="centered" style="width: 100%; margin: auto;">
+                <img src="src/captobox_front.png" alt="Card Back" width="800" class="centered" style="position: relative;">
+                <img src="src/captobox_back.png" class="img-top" alt="Card Front" width="800">
+            </div>
+        </a>
+
+        </div>
+
+    </section>
+
+    <footer style="text-align: center;" class="hidden">
+        <a target="_blank" href="https://www.lespetitsdebrouillardsoccitanie.org/actualites/">
+            <h2 STYLE="color: #FFFFFF;">Les Petits Débrouillards</h2>
+        </a>
+    </footer>
+
+</body>
+
+<!--
+        .
+       ":"
+     ___:____     |"\/"|
+   ,'        `.    \  /
+   |  O        \___/  |
+ ~^~^~^~^~^~^~^~^~^~^~^~^~
+
+      By MathisNns
+
+-->
+
+</html>

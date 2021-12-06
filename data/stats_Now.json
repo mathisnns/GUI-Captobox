@@ -1,0 +1,12 @@
+{
+    "Type": "dataNow",
+    "File" : "stats_Now",
+    "Time" : 1622805600,
+    "Temp": 28.60,
+    "Hum": 45.14,
+    "Pres": 101.72,
+    "Cov": 60,
+    "Pm": 19,
+    "Co2": 1400,
+    "Mono": 6
+}

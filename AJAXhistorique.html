@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    //code injected by the server/captobox to define wich page to load 
+
+    var file = "historique";
+
+    //var file = window.location.hash.substring(1);
+
+    console.log(file);
+</script>
+
+<head>
+    <title>Capto Box</title>
+    
+    <style>
+        .circle {
+            margin: 200px auto 200px;
+            width: 275px;
+            height: 275px;
+            border-radius: 50%;
+            border: 10px solid transparent;
+            border-top-color: #bcc3ca;
+            border-bottom-color: #bcc3ca;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+
+    <script>
+        var launch = false;
+
+        function displayError(err) {
+            if (document.getElementById('error').innerHTML == "") {
+                document.getElementById('error').innerHTML = "erreur " + err;
+            } else {
+                document.getElementById('error').innerHTML += "erreur " + err;
+            }
+        }
+
+        function addFile(str) {
+            var head = document.head;
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.innerHTML = str;
+            head.appendChild(script);
+        }
+
+        function init() {
+            function getfile(url, callback) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.responseType = 'text';
+                xhr.onerror = function(message, source, noligne, nocolonne, erreur) {
+                    console.log(message);
+                }
+                xhr.onload = function() {
+                    var status = xhr.status;
+                    if (status == 200) {
+                        callback(null, xhr.response);
+                    } else {
+                        callback(status);
+                    }
+                };
+                xhr.send();
+            };
+
+            getfile(file + ".html", function(err, data) {
+                if (err != null) {
+                    console.error(err);
+                    displayError(err);
+                } else {
+                    var bodyHtml = /<body.*?>([\s\S]*)<\/body>/.exec(data)[1];
+
+                    document.body.innerHTML = bodyHtml;
+                    ///////////
+                    //requettes XHR en cascade pour pas qu'elles soient faites toutes en meme temps et pour ne pas surcharger l' ESP8266
+                    /////////////
+                    getfile('deviceType.js', function(err, data) {
+                        if (err != null) {
+                            console.error(err);
+                            displayError(err);
+                        } else {
+
+                            addFile(data);
+
+                            getfile(file + "Script.js", function(err, data) {
+                                if (err != null) {
+                                    console.error(err);
+                                    displayError(err);
+                                } else {
+                                    addFile(data);
+
+                                    if (file == "mesures" || file == "historique") {
+                                        getfile('apexcharts.js', function(err, data) {
+                                            if (err != null) {
+                                                console.error(err);
+                                                displayError(err);
+                                            } else {
+                                                addFile(data);
+
+                                                if (file == "historique") {
+                                                    getfile('optionsCharts.js', function(err, data) {
+                                                        if (err != null) {
+                                                            console.error(err);
+                                                            displayError(err);
+                                                        } else {
+                                                            addFile(data);
+
+                                                            launch = true;
+                                                        }
+                                                    });
+                                                } else {
+                                                    launch = true;
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        var all = document.getElementsByClassName('hidden');
+                                        for (var i = 0; i < all.length; i++) {
+                                            all[i].style.display = 'block';
+                                        }
+                                        document.getElementById("circle").style.display = "none";
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+        window.onload = init();
+
+        window.onerror = function(message, source, noligne, nocolonne, erreur) {
+            console.log(message);
+            displayError(message);
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="circle"></div>
+
+    <h1 id="error" style="margin: 0px auto 0px; text-align: center;"></h1>
+
+</body>
+
+<!--
+        .
+       ":"
+     ___:____     |"\/"|
+   ,'        `.    \  /
+   |  O        \___/  |
+ ~^~^~^~^~^~^~^~^~^~^~^~^~
+
+      By MathisNns
+
+-->
+
+</html>

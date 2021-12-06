@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Capto Box</title>
+    
+    <meta charset="utf-8" http-equiv="refresh" content="60" />
+
+    <script>
+        var launch = true;
+    </script>
+
+    <script src="deviceType.js"></script>
+    <script src="apexcharts.js"></script>
+    <script src="mesuresScript.js"></script>
+
+
+
+    <style>
+        .circle {
+            margin: 200px auto 200px;
+            width: 275px;
+            height: 275px;
+            border-radius: 100%;
+            border: 10px solid transparent;
+            border-top-color: #bcc3ca;
+            border-bottom-color: #bcc3ca;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+
+</head>
+
+
+
+<body onload="initBody()">
+
+    <div class="circle" id="circle"></div>
+
+    <h1 id="error" style="margin: 0px auto 0px; text-align: center;"></h1>
+
+    <header class="hidden">
+        <h1>
+            CaptoBox :
+        </h1>
+        <nav>
+            <ul>
+                <li id="on"><a href="index.html">Mesures</a></li>
+
+                <li><a href="AJAXhistorique.html">Historique</a></li>
+
+                <li><a href="AJAXinfos.html">Infos</a></li>
+
+                <li><a href="AJAXsetup.html" class="rightMenu">Parametres</a></li>
+
+            </ul>
+        </nav>
+
+    </header>
+
+    <section class="hidden">
+
+        <h2 class="centered">CaptoBox :</h2>
+
+        <hr>
+
+        <table class="centered">
+            <td>
+                <div class="chartsNow" id=chartMono></div>
+            </td>
+            <td>
+                <div class="chartsNow" id=chartCo2></div>
+            </td>
+        </table>
+
+        <hr>
+
+        <table class="centered">
+            <td>
+                <div class="chartsNow" id=chartCov></div>
+            </td>
+            <td>
+                <div class="chartsNow" id=chartPFines></div>
+            </td>
+        </table>
+
+        <hr>
+
+        <div>
+            <table class="centered">
+                <tr>
+                    <td style="text-align: center; width: 33%;">
+                        <h2>Température :</h2>
+                    </td>
+                    <td style="text-align: center; width: 33%;">
+                        <h2>Humidité :</h2>
+                    </td>
+                    <td style="text-align: center; width: 33%;">
+                        <h2>Préssion atm. :</h2>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: center;">
+                        <h2 id="temp"></h2>
+                    </td>
+                    <td style="text-align: center;">
+                        <h2 id="hum"></h2>
+                    </td>
+                    <td style="text-align: center;">
+                        <h2 id="press"></h2>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <hr>
+
+        <a style="text-decoration: underline; font-size: 100%;" href="#avertissement">Avertissement :</a>
+
+        <div id="avertissement">
+            <br>
+            <h4>Les données mesurées par la Captobox sont à titre indicatif. Pour pouvoir respecter le cahier des charges ( taille, coût ...), les capteurs choisit pour ce projet ne sont pas d'une grande précision.
+            </h4>
+            <a style="text-decoration: underline;" href="#close">fermer</a>
+        </div>
+
+
+
+    </section>
+
+
+
+    <footer style="text-align: center;" class="hidden">
+        <a target="_blank" href="https://www.lespetitsdebrouillardsoccitanie.org/actualites/">
+            <h2 STYLE="color: #FFFFFF;">Les Petits Débrouillards</h2>
+        </a>
+    </footer>
+
+</body>
+
+<!--
+        .
+       ":"
+     ___:____     |"\/"|
+   ,'        `.    \  /
+   |  O        \___/  |
+ ~^~^~^~^~^~^~^~^~^~^~^~^~
+
+      By MathisNns
+
+-->
+
+</html>

@@ -1,0 +1,276 @@
+body {
+    position: absolute;
+    width: 800px;
+    height: 100%;
+    left: 50%;
+    margin-left: -400px;
+    font-family: Arial;
+}
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////
+    balises
+    /////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+h2 {
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a :hover {
+    color: #3388BB;
+}
+
+section a {
+    color: black;
+}
+
+.centered {
+    width: 100%;
+    text-align: center;
+}
+
+.link :hover {
+    color: #3388BB;
+}
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////
+menu
+/////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+nav li {
+    float: left;
+    width: 110px;
+    border-right: 1px solid #bbb;
+}
+
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+
+/* Change the link color to #3388BB; (blue) on hover */
+
+nav li a:hover {
+    background-color: #3388BB;
+}
+
+#on {
+    background-color: #3388BB;
+    color: #333333;
+}
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////
+charts
+/////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.chartsNow {
+    width: 400px;
+}
+
+.chartsNow div {
+    text-align: center;
+    display: block;
+    margin: auto;
+}
+
+.chartsNow svg {
+    margin-right: 0px;
+}
+
+table {
+    width: 800px;
+}
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////
+buttons
+/////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+#avertissement {
+    display: none;
+}
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////
+historique
+/////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+#boutonHistorique {
+    text-align: center;
+    margin: auto;
+    width: 450px;
+}
+
+#boutonHistorique :hover {
+    color: #3388BB;
+}
+
+.buttonHist {
+    display: inline-block;
+    background-color: #bcc3ca;
+    color: black;
+    padding: 15px 30px;
+    width: 80px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#boutonRetour {
+    display: none;
+}
+
+#courbes {
+    display: none;
+}
+
+#boutonComposant {
+    display: none;
+}
+
+#mobile {
+    display: none;
+}
+
+#zonededanger {
+    display: none;
+}
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////
+informations
+/////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.content {
+    display: none;
+}
+
+.card {
+    width: 800px;
+    position: relative;
+    display: inline-block;
+}
+
+.card .img-top {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+
+.card:hover .img-top {
+    display: inline;
+}
+
+#pcInfoMenu td {
+    width: 33.33%;
+    margin: auto;
+}
+
+#pcInfoMenu td :hover {
+    color: #3388BB;
+}
+
+#user_manual :hover {
+    color: #3388BB;
+}
+
+#github :hover {
+    color: #3388BB;
+}
+
+#infosCaptobox a :hover {
+    color: #3388BB;
+}
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////
+setup
+/////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+#setup div {
+    margin: 0 auto;
+    width: 300px;
+}
+
+#setup h3 {
+    text-align: center;
+}
+
+#setup div hr {
+    width: 600px;
+    margin-left: -150px;
+}
+
+#setup .infos {
+    display: none;
+}
+
+#setup .input div {
+    height: 21px;
+    margin: auto;
+}
+
+#setup img {
+    vertical-align: top;
+    height: 21px;
+}
+
+#informationsCapto td {
+    border: 1px solid #070707;
+}
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////
+footer
+/////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+footer {
+    padding: 0px;
+    margin: 0px;
+    position: relative;
+    list-style-type: none;
+    background-color: #333333;
+    text-decoration: none;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+
+/*
+        .
+       ":"
+     ___:____     |"\/"|
+   ,'        `.    \  /
+   |  O        \___/  |
+ ~^~^~^~^~^~^~^~^~^~^~^~^~
+
+      By MathisNns
+
+*/

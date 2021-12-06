@@ -1,0 +1,18 @@
+{
+    "name": "Captobox-1",
+    "ip": "192.168.1.1",
+    "ssid": "Livebox-F510",
+    "canal": 5,
+    "mdp": "",
+    "mode": "networked",
+    "RTCvalue": "2021-06-04-19-41",
+    "ESPfirmware": "1.0.1",
+    "ATMEGAfirmware": "1.0.0",
+    "OTAPassword": "admin",
+    "OTAID": "captobox",
+    "FTPPassword": "admin",
+    "FTPID": "captobox",
+    "NTPServer": "europe.pool.ntp.org",
+    "owner": "Les Petits Derbouillards",
+    "ownerKey": "656dee02b17670da1a9f1f5d95315269"
+}
