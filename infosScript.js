@@ -1,4 +1,4 @@
-function init() {
+function initPage() {
     checkDeviceType();
 
     document.body.style.display = "inline";
@@ -33,7 +33,7 @@ function init() {
     loadImg();
 }
 
-init();
+initPage();
 
 function resizeImg(img) {
     img.height = (window.innerWidth / 2) - 10;

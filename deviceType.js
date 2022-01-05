@@ -9,12 +9,9 @@ function checkDeviceType() {
     if (deviceType) {
         //document.getElementById("deviceType").textContent = "mobile" + navigator.userAgent;
 
-
-
         includeCss("mobile");
 
         console.log(window.innerWidth);
-
 
         fontSize = '30px';
         fontSize2 = '40px';
@@ -30,7 +27,6 @@ function checkDeviceType() {
         chartSize = 500;
         XSize = 60;
     }
-
 }
 
 checkDeviceType();
@@ -50,9 +46,13 @@ function includeCss(type) {
     link.href = "style" + type + ".css";
     // Append link element to HTML head
     head.appendChild(link);
+
+    link.onload = function () {
+        console.log("css loaded ");
+        //launch = true;
+
+    }
     //reloadCss();
-
-
 }
 
 function reloadCss() {

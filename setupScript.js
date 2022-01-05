@@ -1,6 +1,6 @@
 //window.confirm("Tu essaie d'acceder aux parametres avancés de la captobox, modifier ces parametres peux gravement endommager la captobox. \n \n est tu sur de continuer ?  ")
 
-function init() {
+function initPage() {
     location.hash = "#";
 
     checkDeviceType();
@@ -102,7 +102,7 @@ var x;
 var mode = "access_point";
 
 function affiche_liens(name) {
-    var myBodyId = document.getElementById("wifi");
+    var myBodyId = document.getElementById("wifilist");
     var optionWifi = document.createElement('option');
     optionWifi.setAttribute('value', name);
     optionWifi.innerHTML = name;
@@ -113,7 +113,7 @@ function affiche_liens(name) {
 
 function send_ssid() {
 
-    var selectElem = document.getElementById('wifi');
+    var selectElem = document.getElementById('wifilist');
 
     var index = selectElem.selectedIndex;
 
@@ -158,6 +158,7 @@ function scan() {
 function access_point() {
     document.getElementById('networked_box').style.display = "none";
     document.getElementById('acces_point_box').style.display = "block";
+    document.getElementById('writeConfig').style.display = "block";
     document.getElementById('scan').style.display = "none";
     document.getElementById("mode").innerHTML = "Captobox en point d'accès :";
     mode = "access_point";
@@ -168,6 +169,7 @@ function networked() {
 
     document.getElementById('acces_point_box').style.display = "none";
     document.getElementById('networked_box').style.display = "block";
+    document.getElementById('writeConfig').style.display = "block";
     document.getElementById('scan').style.display = "block";
     document.getElementById("mode").innerHTML = "Captobox dans un reseau existant :";
     mode = "networked";
@@ -244,6 +246,33 @@ function load_config() {
     };
     xh_serveur.send(null);
 }
+
+function launchPage() {
+	console.log("in launch");
+	console.log(launch);
+	if (launch) {
+
+		console.log("launching");
+
+        
+
+		var all = document.getElementsByClassName('hidden');
+		for (var i = 0; i < all.length; i++) {
+			all[i].style.display = 'block';
+		}
+		document.getElementById("circle").style.display = "none";
+
+        
+
+		initPage();
+
+	} else {
+		setTimeout(launchPage, 300); // try again in 300 milliseconds
+	}
+}
+
+launchPage();
+
 
 /*
         .

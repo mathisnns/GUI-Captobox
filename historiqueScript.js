@@ -18,8 +18,10 @@ var progress = 0;
 
 var displayData = false;
 
-function init() {
+function initPage() {
 	checkDeviceType();
+
+	console.log(location.hash);
 
 	if (location.hash === '#1jour') {
 		day = 1;
@@ -63,6 +65,14 @@ function init() {
 	}
 	else{
 		location.hash = "";
+	}
+
+	
+	if ((location.hash == '#1jour' || location.hash == '#3jours' || location.hash == '#7jours') && (!deviceType)) {
+		document.getElementById("indicateur").style.display = "inline-block";
+		document.getElementById("courbes").style.display = "inline";
+		document.getElementById("boutonHistorique").style.display = "none";
+		document.getElementById("boutonRetour").style.display = "inline";
 	}
 
 
@@ -473,6 +483,8 @@ function launchPage() {
 			all[i].style.display = 'block';
 		}
 		document.getElementById("circle").style.display = "none";
+
+		initPage();
 
 	} else {
 		setTimeout(launchPage, 300); // try again in 300 milliseconds
