@@ -75,7 +75,7 @@
                 xhr.send();
             }
 
-            getfile(file + ".html", function (err, data) {
+            getfile("content-" + file + ".html", function (err, data) {
                 if (err != null) {
                     console.error(err);
                     displayError(err);

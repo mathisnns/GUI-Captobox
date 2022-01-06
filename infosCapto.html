@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<script>
+
+    var file = "infosCapto";
+
+    console.log(file);
+</script>
 
 <head>
     <title>CaptoBox</title>
-    
-    <meta charset="utf-8" />
-    <script src="scriptInfosCapto.js"></script>
-    <script src="deviceType.js"></script>
 
+    <link rel="shortcut icon" type="image/jpg" href="favicon.ico"/>
+    
     <style>
         .circle {
             margin: 200px auto 200px;
@@ -25,398 +30,128 @@
                 transform: rotate(360deg);
             }
         }
+        
+        .hidden {
+            display: none;
+        }
     </style>
+
+    <script>
+        var launch = false;
+
+        function displayError(err) {
+            if (document.getElementById('error').innerHTML == "") {
+                document.getElementById('error').innerHTML = "erreur " + err;
+            } else {
+                document.getElementById('error').innerHTML += "erreur " + err;
+            }
+        }
+
+        function addFile(str) {
+            var head = document.head;
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.innerHTML = str;
+            head.appendChild(script);
+        }
+
+        function init() {
+            function getfile(url, callback) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.responseType = 'text';
+                xhr.onerror = function(message, source, noligne, nocolonne, erreur) {
+                    console.log(message);
+                }
+                xhr.onload = function() {
+                    var status = xhr.status;
+                    if (status == 200) {
+                        callback(null, xhr.response);
+                    } else {
+                        callback(status);
+                    }
+                };
+                xhr.send();
+            };
+
+            getfile("content-" + file + ".html", function(err, data) {
+                if (err != null) {
+                    console.error(err);
+                    displayError(err);
+                } else {
+                    var bodyHtml = /<body.*?>([\s\S]*)<\/body>/.exec(data)[1];
+
+                    document.body.innerHTML = bodyHtml;
+                    ///////////
+                    //requettes XHR en cascade pour pas qu'elles soient faites toutes en meme temps et pour ne pas surcharger l' ESP8266
+                    /////////////
+                    getfile('deviceType.js', function(err, data) {
+                        if (err != null) {
+                            console.error(err);
+                            displayError(err);
+                        } else {
+
+                            addFile(data);
+
+                            getfile(file + "Script.js", function(err, data) {
+                                if (err != null) {
+                                    console.error(err);
+                                    displayError(err);
+                                } else {
+                                    addFile(data);
+
+                                    if (file == "mesures" || file == "historique") {
+                                        getfile('apexcharts.js', function(err, data) {
+                                            if (err != null) {
+                                                console.error(err);
+                                                displayError(err);
+                                            } else {
+                                                addFile(data);
+
+                                                if (file == "historique") {
+                                                    getfile('optionsCharts.js', function(err, data) {
+                                                        if (err != null) {
+                                                            console.error(err);
+                                                            displayError(err);
+                                                        } else {
+                                                            addFile(data);
+
+                                                            launch = true;
+                                                        }
+                                                    });
+                                                } else {
+                                                    launch = true;
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        var all = document.getElementsByClassName('hidden');
+                                        for (var i = 0; i < all.length; i++) {
+                                            all[i].style.display = 'block';
+                                        }
+                                        document.getElementById("circle").style.display = "none";
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+        window.onload = init();
+
+        window.onerror = function(message, source, noligne, nocolonne, erreur) {
+            console.log(message);
+            displayError(message);
+        }
+    </script>
 </head>
 
-<div class="circle" id="circle"></div>
+<body>
 
-<body id="informationsCapto" onload="init()" STYLE="display: none;">
-
-    <div class="circle" id="circle"></div>
+    <div class="circle"></div>
 
     <h1 id="error" style="margin: 0px auto 0px; text-align: center;"></h1>
-
-    <header class="hidden">
-        <h1>
-            CaptoBox :
-        </h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Mesures</a></li>
-                <li ><a href="AJAXhistorique.html">Historique</a></li>
-                <li id="on"><a href="AJAXinfos.html">Infos</a></li>
-                <li class="rightMenu"><a href="AJAXsetup.html" class="rightMenu">Parametres</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section class="hidden">
-
-        <div class="centered">
-            <h2 style="display: inline-block;">Informations sur la CaptoBox :</h2>
-        </div>
-
-        <br>
-
-        <div id="captoImg">
-            <img class="centered" src="src/captobox_front.png" width="100%">
-        </div>
-
-        <div class="infos" style="width: 90%; margin: auto;">
-            <hr>
-
-            <h3 class="centered">Comment fonctionne cette CaptoBox ?</h3>
-      
-
-            <p>
-                Pour découvrir le fonctionnement de cette captobox, vous pouvez cliquer sur les différentes boites ci dessous, vous y trouverez des explications sur le fonctionnement des différents capteurs et composants qui la constituent.
-            </p>
-            <span>Pour découvrir l'utilisation de la captobox, cliquez sur la boite </span><span class="link"><a style="text-decoration: underline;" href="#user_manual">"mode d'emploi"</a></span>
-
-            <span>, ci dessous.</span>
-            <br>
-            <br>
-
-            <hr>
-
-            <div id="mq7" class="content">
-                <div class="centered"><img src="src/mq7.jpg" height="300"></div>
-                <p>
-                    <h3 class="centered">Le MQ7 :</h3>
-                    <p>
-                        Le MQ7 est un capteur de monoxyde de carbone.
-                    </p>
-                    <p>
-                        Il fonctionne grâce à une membrane en métal, dont la conductivité électrique change en fonction de la quantité de monoxyde de carbone avec laquelle elle entre en contact.
-                    </p>
-                    <p>
-                        Pour nettoyer cette membrane et enlever des particules qui pourraient fausser les valeurs des mesures, il suffit de changer la tension d’alimentation du capteur. Le capteur a donc 2 modes : mode chauffe avec la tension d’alimentation au maximum, soit
-                        5V, mode mesure, avec la tension à 20 % de la tension max, soit 1,4V.
-                    </p>
-                    <p>
-                        Pour pouvoir avoir une valeur fiable, il est impératif que le capteur suive des cycles de chauffe : chauffe à 5V pendant 1min30, puis, mode mesure pendant 60s, puis retour au premier cycle.
-                    </p>
-                </p>
-                <hr>
-            </div>
-
-            <div id="screen" class="content">
-                <div class="centered"><img src="src/screen.png" height="300"></div>
-                <p>
-                    <h3 class="centered">L'ecran tactile :</h3>
-                    <p>
-                        Pour pouvoir afficher les données des capteurs, la Captobox dispose d’un écran LCD tactile.
-                    </p>
-                    <p>
-                        Cet écran a une résolution de 480 pixels par 320 pixels ( 480x320 ).
-                    </p>
-                    <p>
-                        Sa particularité est qu’il dispose d’une technologie tactile « résistive ». Contrairement aux écrans à technologie « capacitive », que nous avons sur nos smartphones, et qui captent le peu d’électricité émise par le bout de nos doigts pour fonctionner,
-                        les écrans résistifs, eux, captent une pression exercée sur la dalle tactile. On peut donc utiliser nos doigts, mais aussi des stylets en plastique non conducteurs ! ( attention toutefois à ne pas abîmer l’écran !!! )
-                    </p>
-                </p>
-                <hr>
-            </div>
-
-            <div id="cjmcu" class="content">
-                <div class="centered"><img src="src/CJMCU-8128.jpg" height="300"></div>
-                <p>
-                    <h3 class="centered">Le CJMCU-8128 :</h3>
-                    <p>
-                        La Captobox est équipée d’un capteur CJMCU-8128. Il s’agit d’un composant 3 en 1, embarquant 3 capteurs différents : un BME280 ( capteur de température et pression ), ccs811 ( capteur de COV et eCO2 ) et un SI7021 ( capteur de température et humidité
-                        ).
-                    </p>
-                    <p>
-                        Le capteur de COV et de eCO2 est celui qui nous intéresse le plus ici.
-                    </p>
-                    <p>
-                        Ce capteur est avant tout un capteur de COV avant d’être un capteur de CO2, mais, il embarque une petite intelligence capable de déduire le taux de CO2 en fonction du taux de COV, c’est pour cela que l’on dit eCO2, qui veut dire « équivalent CO2 ».
-                    </p>
-                </p>
-                <hr>
-            </div>
-
-            <div id="sharp" class="content">
-                <div class="centered"><img src="src/sharp_sensor.jpg" height="300"></div>
-                <p>
-                    <h3 class="centered">Le capteur optique de particules :</h3>
-                    <p>
-                        <p>
-                            Ce capteur capte les particules en suspension dans l’air grâce à un système optique.
-                        </p>
-                        <p>
-                            Il se compose d’une led infrarouge, placée dans un coin du capteur, d’un photo transistor ( un interrupteur électrique qui laisse passer le courant en fonction de la lumière qu’il reçoit, plus il reçoit de lumière, plus il laisse passer de courant ) placé
-                            dans le coin opposé, et d’un trou qui sépare les deux. Lorsque de l’air pur passe par le trou, le photo transistor reçoit toute la lumière de la led, et laisse donc passer tout le courant. Mais lorsque de l’air chargé de particules
-                            en suspension passe par le trou, la lumière émise par la led est légèrement atténuée, le transistor reçoit moins de lumière et laisse donc passer moins de courant. La teneur de particules en suspension dans l’air augmente donc
-                            lorsque la valeur de sortie de la tension du capteur diminue.
-                        </p>
-                        <hr>
-            </div>
-
-            <div id="wemos" class="content">
-                <div class="centered"><img src="src/wemos_mega.JPG" height="300"></div>
-                <p>
-                    <h3 class="centered">Le Wemos Mega :</h3>
-                    <p>
-                        <p>
-                            Le Wemos Mega est la carte électronique principale de la Captobox, aussi appelée « carte mère ».
-                        </p>
-                        <p>
-                            Elle dispose de connecteurs que l’on appel les « pins », les « entrées/sorties » ou encore les « GPIO » . Il s’agit de petits connecteurs électroniques de type femelle, dans lesquels les extensions viennent se brancher.
-                        </p>
-                        <p>
-                            On peut ainsi connecter des moteurs, des capteurs, des lumières, ou d’autres types d’actionneurs à la carte mère.
-                        </p>
-                        <p>
-                            Cette carte électronique est une carte de type « Arduino Mega », elle a donc une taille spécifique pour pouvoir accueillir des extensions que l’on appelle des « shields ». L’écran tactile est un Shield.
-                        </p>
-                        <p>
-                            La particularité de cette carte réside dans ses microcontrôleurs ( abrégé µcontrôleur, ou, µc ). Un microcontrôleur est un composant électronique qui va jouer le rôle de cerveau de la carte, c’est lui qui va faire tous les calculs et commander l’ensemble.
-                            La très grande majorité des cartes électroniques du même type ne possèdent qu’un seul microcontrôleur, hors, cette carte en dispose de deux.
-                        </p>
-                        <p>
-                            Le premier est un ATMEGA 2560 du fabriquant ATMEL, c’est un très gros µcontrôleur qui peut effectuer beaucoup de calculs et gérer beaucoup d’entrées/sorties et de ports de communications, mais, il ne dispose pas de connectivité sans fil !
-                        </p>
-                        <p>
-                            Le second est un ESP8266 du fabricant ESPRESSIF, qui lui, est beaucoup plus petit, mais a la particularité d’avoir une connectivité WIFI intégrée !
-                        </p>
-                        <p>
-                            La carte marche donc en tandem avec ces 2 composants, le ATMEGA2560 accède aux données des capteurs et à l’écran tactile, et les envoie a l’ESP8266 qui lui se charge de l’interface web et du WIFI.
-                        </p>
-                        <p>
-                            Les 2 composants sont reliés par un port de communication UART ( Universal Asynchrous Receiver Transmitter ).
-                        </p>
-                        <hr>
-            </div>
-
-            <div id="modules" class="content">
-                <div class="centered"><img src="src/ds3231_and_sd.png" height="300"></div>
-                <p>
-                    <h3 class="centered">Les modules complementaires:</h3>
-                    <p>
-                        <p>
-                            Pour fonctionner correctement, la Captobox a besoin d’autres composants électroniques comme un module d’horloge ( RTC ) et un module de carte SD.
-                        </p>
-                        <p>
-                            La carte mère de la Captobox peut effectuer toute seule la gestion du temps, mais, elle n’est pas d’une grande précision. Par exemple, si la carte devait compter toute les secondes qui passent pour gérer le temps, elle aurait un décalage de 1 milliseconde
-                            par seconde. C’est à dire qu’au lieu de compter 1 seconde, elle compte 1,001 secondes ( différence imperceptible par l’Être humain ). Sauf qu’avec ce léger écart, la carte aura déjà 1,4 min de décalage avec le temps réel au
-                            bout de 24h, 2,8 min au bout de 48h, etc. Ce décalage peut poser problème lorsque l’ont veut faire des mesures sur le long terme en utilisant une échelle temporaire.
-                        </p>
-                        <p>
-                            Pour palier ce problème, on utilise un module d’horloge à temps réel ( Real Time Clock en anglais, RTC ). Un module RTC est un composant électronique qui n’a que pour fonction de gérer le temps, mais, avec une très grande précision, ce qui permet de n’avoir
-                            un décalage d’une minute qu’au bout d’une année.
-                        </p>
-                        <p>
-                            Ce capteur est connecté à la carte mère avec une connexion I2C ( Inter-Integrated Circuit ). La norme I2C a la particularité de ne nécessiter que 3 fils pour fonctionner, donc d’économiser de la place, et de pouvoir connecter de nombreux composants sur
-                            ces 3 mêmes fils.
-                        </p>
-                        <p>
-                            Pour pouvoir sauvegarder les données mesurées sur le long terme, nous avons besoin d’espace de stockage, hors, la carte mère n’en dispose que de très très peu ( pas assez pour stocker une petite photo ). On a donc besoin d’un adaptateur pour connecter
-                            une carte micro SD et pouvoir stocker les données sur ce support.
-                        </p>
-                        <p>
-                            Cet adaptateur utilise une connexion SPI ( Serial Peripherical Interface ) pour communiquer avec la carte mère. Le SPI utilise 4 fils pour fonctionner, mais, il est plus rapide que l’I2C.
-                        </p>
-                        <hr>
-            </div>
-
-        </div>
-
-        </div>
-
-
-        <div id="pcInfoMenu" style="display: none; width: 100%;">
-            <table class="centered" style="font-weight: bold">
-
-                <td>
-                    <a href="#wemos1">
-                        <div>
-                            <img id="img1" src="" height="155">
-                        </div>
-                        <h3>Carte électronique</h3>
-                        <br>
-                    </a>
-                </td>
-
-                <td>
-                    <a href="#screen1">
-                        <div>
-                            <img id="img2" src="" height="155">
-                        </div>
-                        <h3>Ecran tactile</h3>
-                        <br>
-                    </a>
-                </td>
-
-                <td>
-                    <a href="#modules1">
-                        <div>
-                            <img id="img3" src="" height="155">
-                        </div>
-                        <h3>Modules</h3>
-                        <br>
-                    </a>
-                </td>
-
-            </table>
-
-            <table class="centered" style="font-weight: bold">
-
-                <td>
-                    <a href="#cjmcu1">
-                        <div>
-                            <img id="img4" src="" height="155">
-                        </div>
-                        <h3>Capteurs CO2/COV</h3>
-                        <br>
-                    </a>
-                </td>
-
-                <td>
-                    <a href="#mq71">
-                        <div>
-                            <img id="img5" src="" height="155">
-                        </div>
-                        <h3>Capteur de monoxyde </h3>
-                        <br>
-                    </a>
-                </td>
-
-                <td>
-                    <a href="#sharp1">
-                        <div>
-                            <img id="img6" src="" height="155">
-                        </div>
-                        <h3>Capteur de particules</h3>
-                        <br>
-                    </a>
-
-                </td>
-
-            </table>
-
-        </div>
-
-
-
-        <div id="phoneInfoMenu" style="display: none;">
-            <table class="centered" style="font-weight: bold">
-
-                <td>
-                    <a href="#wemos1">
-                        <div>
-                            <img id="img7" src="src/wemos_mega.JPG">
-                        </div>
-                        <h3>Carte électronique</h3>
-                        <br>
-                    </a>
-                </td>
-
-                <td>
-                    <a href="#screen1">
-                        <div>
-                            <img id="img8" src="src/screen.png">
-                        </div>
-                        <h3>Ecran tactile</h3>
-                        <br>
-                    </a>
-                </td>
-
-            </table>
-
-            <table style="font-weight: bold">
-                <td>
-                    <a href="#modules1">
-                        <div>
-                            <img id="img9" src="src/ds3231_and_sd.png">
-                        </div>
-                        <h3>Modules</h3>
-                        <br>
-                    </a>
-                </td>
-
-                <td>
-                    <a href="#cjmcu1">
-                        <div>
-                            <img id="img10" src="src/CJMCU-8128.jpg">
-                        </div>
-                        <h3>Capteurs CO2/COV</h3>
-                        <br>
-                    </a>
-                </td>
-            </table>
-
-            <table class="centered" style="font-weight: bold">
-                <td>
-                    <a href="#mq71">
-                        <div>
-                            <img id="img11" src="src/mq7.jpg">
-                        </div>
-                        <h3>Capteur de monoxyde </h3>
-                        <br>
-                    </a>
-                </td>
-
-                <td>
-                    <a href="#sharp1">
-                        <div>
-                            <img id="img12" src="src/sharp_sensor.jpg">
-                        </div>
-                        <h3>Capteur de particules</h3>
-                        <br>
-                    </a>
-
-                </td>
-
-            </table>
-
-        </div>
-
-
-        <div class="infos">
-            <hr>
-
-            <div class="centered" id="user_manual">
-                <br>
-                <a target="_blank" href="src/user_manual.pdf">
-                    <img src="src/pdf.png" alt="" class="infosCaptoIMG" >
-                    <h3>Mode d'emploi</h3>
-                </a>
-            </div>
-
-            <hr>
-
-            <div class="centered" id="github">
-                <br>
-                <a target="_blank" href="https://github.com/mathisnns/Captobox">
-                    <img src="src/GitHub.png" alt=""  class="infosCaptoIMG">
-                    <h3>Sources Github</h3>
-                </a>
-
-            </div>
-
-            <hr>
-
-            <div class="centered">
-                <p>
-                    Version Firmware ESP8266 : 1.0.4 - Version Firmware ATMEGA2560 : 1.0.4
-                </p>
-                <p>
-                    Version GUI : 1.0.4
-                </p>
-                <p>
-                    Mathis Nunes
-                </p>
-            </div>
-        </div>
-
-    </section>
-
-    <footer style="text-align: center;" class="hidden">
-        <a target="_blank" href="https://www.lespetitsdebrouillardsoccitanie.org/actualites/">
-            <h2 STYLE="color: #FFFFFF;">Les Petits Débrouillards</h2>
-        </a>
-    </footer>
 
 </body>
 

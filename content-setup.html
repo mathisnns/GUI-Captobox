@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<div class="circle"></div>
+
+<head>
+	<title>CaptoBox</title>
+	<meta charset="utf-8" />
+	<script src="scriptSetup.js"></script>
+	<script src="deviceType.js"></script>
+
+	<style>
+		.circle {
+			margin: 200px auto 200px;
+			width: 275px;
+			height: 275px;
+			border-radius: 50%;
+			border: 10px solid transparent;
+			border-top-color: #bcc3ca;
+			border-bottom-color: #bcc3ca;
+			animation: spin 1s ease-in-out infinite;
+		}
+
+		@keyframes spin {
+			to {
+				transform: rotate(360deg);
+			}
+		}
+	</style>
+</head>
+
+
+
+<body onload="javascript:load_config()">
+
+	<div class="circle" id="circle"></div>
+
+	<h1 id="error" style="margin: 0px auto 0px; text-align: center;"></h1>
+
+
+	<header class="hidden">
+		<h1>
+			CaptoBox :
+		</h1>
+		<nav>
+			<ul>
+				<li><a href="index.html">Mesures</a></li>
+				<li><a href="historique.html">Historique</a></li>
+				<li><a href="infos.html">Infos</a></li>
+				<li class="rightMenu" id="on"><a href="setup.html" class="rightMenu">Parametres</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<section style="width: 100%;" id="setup" class="hidden">
+		<div class="centered">
+			<h2>Parametres :</h2>
+		</div>
+
+		<hr>
+
+		<div>
+			<h3>Général</h3>
+
+			<h4>Nom de la Captobox</h4>
+
+			<div class="input">
+				<input id="name" type="text" name="name" value="nom" style="width: 88%;">
+				<a id="info1link" href="#1" style="width:10%;"
+					title="Ici le nom de votre CaptoBox, ce nom servira aussi à créer le réseau Wifi en mode Point d'accès"
+					data-toggle="popover" data-trigger="hover" style="text-decoration:none"><img src="src/info.svg"
+						alt=""></a>
+			</div>
+
+			<div id="info1" class="infos">
+				<h5 style="display: inline-block;">Ici le nom de votre CaptoBox, ce nom servira aussi à créer le réseau
+					Wifi en mode Point d'accès.</h5>
+			</div>
+
+			<br>
+			<hr>
+		</div>
+
+		<div>
+			<h3>
+				Configuration du réseau :
+			</h3>
+
+			<div class="centered" style="width: 100%;" id="setupBouton">
+				<button type="button" class="btn btn-danger" onclick="access_point()">Mode point
+					d'acces</button>
+				<button type="button" class="btn btn-danger" onclick="networked()">Mode réseau
+					existant</button>
+			</div>
+
+			<br>
+
+			<hr>
+
+			<h3 id="mode"></h3>
+
+		</div>
+
+		<div id='acces_point_box' style="display:none">
+
+			<h4>Canal du réseau</h4>
+			<input id="canal" type="text" name="canal" value="8">
+			<a id="info2link" href="#2"
+				title="Changez le canal wifi si vous utilisez plusieurs PetitsBot, ceci pour éviter les perturbations wifi"
+				data-toggle="popover" data-trigger="hover" style="text-decoration:none"><img src="src/info.svg"
+					alt=""></a>
+			<br>
+			<div id="info2" class="infos">
+				<h5>Changez le canal wifi si vous utilisez plusieurs Captoboxs, ceci pour éviter les perturbations wifi.
+				</h5>
+			</div>
+
+
+			<h4>Adresse IP</h4>
+			<input id="ip" type="text" name="ip" value="ip">
+			<a id="info3link" href="#3" title="Fixez une adresse IP à votre PetitBot, lassez vide pour utiliser le DHCP"
+				data-toggle="popover" data-trigger="hover" style="text-decoration:none"><img src="src/info.svg"
+					alt=""></a>
+			<br>
+
+			<div id="info3" class="infos" style="margin-bottom: 0px;">
+				<h5 style="margin-bottom: 0px;">Fixez une adresse IP à votre Captobox, lassez vide pour utiliser le DHCP
+					et generer un adresse IP automatiquement.</h5>
+			</div>
+
+		</div>
+
+		<div id='networked_box' style="display:none">
+
+			<div id="scan">
+
+				<div class="centered" style="width: 100%;">
+					<button id="scan_button" type="button" class="btn btn-success" onclick="scan()">Scanner les
+						reseaux</button>
+				</div>
+				<br>
+
+				<div style="text-align: center;">
+
+
+					<div id="listetext" style="display: none;">
+						<h4 style="display : none">Reseaux disponibles :</h4>
+
+						<select name="wifi" id="wifilist" onchange="send_ssid()">
+							<option value="">--choisir un reseau wifi--</option>
+						</select>
+					</div>
+
+
+				</div>
+			</div>
+
+			<h4>SSID :</h4>
+			<input id="reseau" type="text" name="SSID" value="ssid">
+			<a id="info4link" href="#4" title="Ici le nom de votre réseau wifi" data-toggle="popover"
+				data-trigger="hover" style="text-decoration:none"><img src="src/info.svg" alt=""></a>
+			<br>
+
+			<div id="info4" class="infos">
+				<h5>Ici le nom de votre réseau wifi.</h5>
+			</div>
+
+
+
+			<h4>Mot de passe :</h4>
+			<input id="mdp" type="password" name="MDP" value="password">
+			<a id="info5link" href="#5" title="Ici le mot de passe de votre réseau wifi" data-toggle="popover"
+				data-trigger="hover" style="text-decoration:none"><img src="src/info.svg" alt=""></a>
+			<br>
+			<div id="info5" class="infos">
+				<h5>Ici le mot de passe de votre réseau wifi.</h5>
+			</div>
+
+
+			<h4>Adresse IP :</h4>
+			<input id="ip" type="text" name="ip" value="ip">
+			<a id="info6link" href="#6"
+				title="Fixez une adresse IP à votre Captobox, lassez vide pour utiliser le DHCP et generer un adresse IP."
+				data-toggle="popover" data-trigger="hover" style="text-decoration:none"><img src="/src/info.svg"
+					alt=""></a>
+			<br>
+			<div id="info6" class="infos">
+				<h5>Fixez une adresse IP à votre Captobox, lassez vide pour utiliser le DHCP et
+					generer un adresse IP automatiquement.</h5>
+			</div>
+		</div>
+
+		<br>
+
+		<div style="text-align: center; display: none;" id="writeConfig">
+			<button id="envoyer" type="button" class="btn btn-danger" onclick="write_config()">Enregistrer</button>
+		</div>
+
+	</section>
+
+	<footer style="text-align: center;" class="hidden">
+		<a target="_blank" href="https://www.lespetitsdebrouillardsoccitanie.org/actualites/">
+			<h2 STYLE="color: #FFFFFF;">Les Petits Débrouillards</h2>
+		</a>
+	</footer>
+</body>
+
+<!--
+        .
+       ":"
+     ___:____     |"\/"|
+   ,'        `.    \  /
+   |  O        \___/  |
+ ~^~^~^~^~^~^~^~^~^~^~^~^~
+
+      By MathisNns
+
+-->
+
+</html>
