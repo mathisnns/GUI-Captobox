@@ -1,5 +1,3 @@
-//window.confirm("Tu essaie d'acceder aux parametres avancés de la captobox, modifier ces parametres peux gravement endommager la captobox. \n \n est tu sur de continuer ?  ")
-
 function initPage() {
     location.hash = "#";
 
@@ -12,41 +10,26 @@ window.onhashchange = locationHashChanged;
 
 function locationHashChanged() {
 
-    /*
-
-    var hash = window.location.hash.substring(1);
-    document.getElementById("info" + hash).style.display = "inline";
-    document.getElementById("info" + hash + "link").href = "#close" + hash;
-
-    */
-
-
-
     if (location.hash === '#1') {
         document.getElementById("info1").style.display = "inline";
         document.getElementById("info1link").href = "#close1";
     }
-
     if (location.hash === '#2') {
         document.getElementById("info2").style.display = "inline";
         document.getElementById("info2link").href = "#close2";
     }
-
     if (location.hash === '#3') {
         document.getElementById("info3").style.display = "inline";
         document.getElementById("info3link").href = "#close3";
     }
-
     if (location.hash === '#4') {
         document.getElementById("info4").style.display = "inline";
         document.getElementById("info4link").href = "#close4";
     }
-
     if (location.hash === '#5') {
         document.getElementById("info5").style.display = "inline";
         document.getElementById("info5link").href = "#close5";
     }
-
     if (location.hash === '#6') {
         document.getElementById("info6").style.display = "inline";
         document.getElementById("info6link").href = "#close6";
@@ -56,44 +39,29 @@ function locationHashChanged() {
     if (location.hash === '#close1') {
         document.getElementById("info1").style.display = "none";
         document.getElementById("info1link").href = "#1";
-        //location.hash = "#";
     }
     if (location.hash === '#close2') {
         document.getElementById("info2").style.display = "none";
         document.getElementById("info2link").href = "#2";
-
     }
     if (location.hash === '#close3') {
         document.getElementById("info3").style.display = "none";
         document.getElementById("info3link").href = "#3";
-
     }
     if (location.hash === '#close4') {
         document.getElementById("info4").style.display = "none";
         document.getElementById("info4link").href = "#4";
-
     }
     if (location.hash === '#close5') {
         document.getElementById("info5").style.display = "none";
         document.getElementById("info5link").href = "#5";
-
     }
     if (location.hash === '#close6') {
         document.getElementById("info6").style.display = "none";
         document.getElementById("info6link").href = "#6";
-
     }
 }
 
-
-function displayAdvancedSetup() {
-    if (window.confirm("Vous essaiez d'acceder aux parametres avancés de la captobox, modifier ces parametres peut gravement endommager la captobox.")) {
-        //window.open("fenetre.html", "Nouvelle fenêtre", "");
-        if (window.confirm("Etes vous sur de savoir ce que vous faites ?")) {
-            document.getElementById("advanced_setup").style.display = "inline";
-        }
-    }
-}
 
 var xh_serveur = new XMLHttpRequest();
 var ssid;
@@ -108,11 +76,9 @@ function affiche_liens(name) {
     optionWifi.innerHTML = name;
 
     myBodyId.appendChild(optionWifi);
-
 }
 
 function send_ssid() {
-
     var selectElem = document.getElementById('wifilist');
 
     var index = selectElem.selectedIndex;
@@ -125,12 +91,6 @@ function send_ssid() {
 
     document.getElementById("mdp").focus();
     document.getElementById("mdp").value = "";
-
-    /*
-
-    if (window.confirm("La Captobox va tenter de se connecter a ce reseau wifi, vous allez etre deconnecté.")) {
-        document.getElementById("reseau").value = nom;
-    }*/
 }
 
 function scan() {
@@ -141,7 +101,6 @@ function scan() {
                 var res = JSON.parse(xh_serveur.responseText);
                 console.log(res);
                 x = "";
-                //document.getElementById("liste").innerHTML = "";
                 document.getElementById('listetext').style.display = "inline-block";
                 for (i = 0; i < res.length; i++) {
                     x = res[i].ssid;

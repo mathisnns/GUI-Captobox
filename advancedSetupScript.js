@@ -1,6 +1,4 @@
-/**
- * ici le code pour le fonctionnement de la page advancedSetup.html
- */
+
 function playVid() {
     var vid = document.getElementById("video");
     vid.play();

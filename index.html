@@ -2,21 +2,19 @@
 <html lang="en">
 
 <script>
-    //code injected by the server/captobox to define wich page to load 
-
     var file = "mesures";
-
-    //var file = window.location.hash.substring(1);
 
     console.log(file);
 </script>
 
 <head>
-    <title>Capto Box</title>
+    <title>CaptoBox</title>
 
-    <link rel="shortcut icon" type="image/jpg" href="favicon.ico"/>
-    
+    <link rel="shortcut icon" type="image/jpg" href="favicon.ico" />
+
     <style>
+        
+
         .circle {
             margin: 200px auto 200px;
             width: 275px;
@@ -27,13 +25,13 @@
             border-bottom-color: #bcc3ca;
             animation: spin 1s ease-in-out infinite;
         }
-        
+
         @keyframes spin {
             to {
                 transform: rotate(360deg);
             }
         }
-        
+
         .hidden {
             display: none;
         }
@@ -63,10 +61,10 @@
                 var xhr = new XMLHttpRequest();
                 xhr.open('GET', url, true);
                 xhr.responseType = 'text';
-                xhr.onerror = function(message, source, noligne, nocolonne, erreur) {
+                xhr.onerror = function (message, source, noligne, nocolonne, erreur) {
                     console.log(message);
                 }
-                xhr.onload = function() {
+                xhr.onload = function () {
                     var status = xhr.status;
                     if (status == 200) {
                         callback(null, xhr.response);
@@ -77,7 +75,7 @@
                 xhr.send();
             }
 
-            getfile(file + ".html", function(err, data) {
+            getfile(file + ".html", function (err, data) {
                 if (err != null) {
                     console.error(err);
                     displayError(err);
@@ -88,7 +86,7 @@
                     ///////////
                     //requettes XHR en cascade pour pas qu'elles soient faites toutes en meme temps et pour ne pas surcharger l' ESP8266
                     /////////////
-                    getfile('deviceType.js', function(err, data) {
+                    getfile('deviceType.js', function (err, data) {
                         if (err != null) {
                             console.error(err);
                             displayError(err);
@@ -96,7 +94,7 @@
 
                             addFile(data);
 
-                            getfile(file + "Script.js", function(err, data) {
+                            getfile(file + "Script.js", function (err, data) {
                                 if (err != null) {
                                     console.error(err);
                                     displayError(err);
@@ -104,7 +102,7 @@
                                     addFile(data);
 
                                     if (file == "mesures" || file == "historique") {
-                                        getfile('apexcharts.js', function(err, data) {
+                                        getfile('apexcharts.js', function (err, data) {
                                             if (err != null) {
                                                 console.error(err);
                                                 displayError(err);
@@ -112,7 +110,7 @@
                                                 addFile(data);
 
                                                 if (file == "historique") {
-                                                    getfile('optionsCharts.js', function(err, data) {
+                                                    getfile('optionsCharts.js', function (err, data) {
                                                         if (err != null) {
                                                             console.error(err);
                                                             displayError(err);
@@ -143,7 +141,7 @@
         }
         window.onload = init();
 
-        window.onerror = function(message, source, noligne, nocolonne, erreur) {
+        window.onerror = function (message, source, noligne, nocolonne, erreur) {
             console.log(message);
             displayError(message);
         }
