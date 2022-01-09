@@ -16,6 +16,9 @@ This GitHub repository is made for demos and presentations of the GUI. The code 
 
 Complete project : https://github.com/mathisnns/Captobox .
 
+### GUI link :
+
+https://mathisnns.github.io/GUI-Captobox/
 
 ## License
 
