@@ -67,7 +67,7 @@ var xh_serveur = new XMLHttpRequest();
 var ssid;
 var i;
 var x;
-var mode = "access_point";
+var mode = false;
 
 function affiche_liens(name) {
     var myBodyId = document.getElementById("wifilist");
@@ -94,7 +94,7 @@ function send_ssid() {
 }
 
 function scan() {
-    xh_serveur.open("GET", "data/scan.json", true);
+    xh_serveur.open("GET", "/scan.json", true);
     xh_serveur.onreadystatechange = function() {
         if (xh_serveur.readyState == 4) {
             if (xh_serveur.status == 200) {
@@ -120,7 +120,7 @@ function access_point() {
     document.getElementById('writeConfig').style.display = "block";
     document.getElementById('scan').style.display = "none";
     document.getElementById("mode").innerHTML = "Captobox en point d'accès :";
-    mode = "access_point";
+    mode = false;
 }
 
 function networked() {
@@ -131,7 +131,7 @@ function networked() {
     document.getElementById('writeConfig').style.display = "block";
     document.getElementById('scan').style.display = "block";
     document.getElementById("mode").innerHTML = "Captobox dans un reseau existant :";
-    mode = "networked";
+    mode = true;
     //scan();
 }
 
@@ -149,14 +149,14 @@ function write_config() {
         return 0;
     }
 
-    if (mode == "access_point") {
+    if (mode == false) {
         if (window.confirm("La Captobox va redemarrer pour applique ces parametres, vous allez être déconnecté.")) {
             var ssid = document.getElementById('reseau').value;
             var mdp = document.getElementById('mdp').value;
             var canal = document.getElementById('canal').value;
             var name = document.getElementById('name').value;
             var ip = document.getElementById('ip').value;
-            var post_config = 'http://192.168.1.18/write?name=' + name + '&mode=' + mode + '&ssid=' + ssid + '&mdp=' + mdp + '&canal=' + canal + '&ip=' + ip;
+            var post_config = '/write?name=' + name + '&mode=' + mode + '&ssid=' + ssid + '&mdp=' + mdp + '&canal=' + canal + '&ip=' + ip;
             xh_serveur.open("GET", post_config, true);
             xh_serveur.onreadystatechange = function() {
 
@@ -164,14 +164,14 @@ function write_config() {
             xh_serveur.send(null);
         }
     }
-    if (mode == "networked") {
+    if (mode == true) {
         if (window.confirm("La Captobox va tenter de se connecter a ce reseau wifi, vous allez être déconnecté.")) {
             var ssid = document.getElementById('reseau').value;
             var mdp = document.getElementById('mdp').value;
             var canal = document.getElementById('canal').value;
             var name = document.getElementById('name').value;
             var ip = document.getElementById('ip').value;
-            var post_config = 'http://192.168.1.18/write?name=' + name + '&mode=' + mode + '&ssid=' + ssid + '&mdp=' + mdp + '&canal=' + canal + '&ip=' + ip;
+            var post_config = '/write?name=' + name + '&mode=' + mode + '&ssid=' + ssid + '&mdp=' + mdp + '&canal=' + canal + '&ip=' + ip;
             xh_serveur.open("GET", post_config, true);
             xh_serveur.onreadystatechange = function() {
 
@@ -182,20 +182,20 @@ function write_config() {
 }
 
 function load_config() {
-    init();
-    xh_serveur.open("GET", "data/config.json", true);
+    xh_serveur.open("GET", "http://192.168.1.18/config.json", true);
     xh_serveur.onreadystatechange = function() {
         if (xh_serveur.readyState == 4) {
             if (xh_serveur.status == 200) {
                 var res = JSON.parse(xh_serveur.responseText);
                 console.log(res);
-                document.getElementById('canal').value = res.canal
-                document.getElementById('name').value = res.name;
-                document.getElementById('ip').value = res.ip;
-                document.getElementById('reseau').value = res.ssid;
+                
+                document.getElementById('canal').value = res.Canal
+                document.getElementById('name').value = res.Name;
+                document.getElementById('ip').value = res.IPAddress;
+                document.getElementById('reseau').value = res.SSID;
                 //document.getElementById('mdp').value = res.mdp;
 
-                if (res.mode == "access_point") {
+                if (res.Mode == false) {
                     access_point();
                 } else {
                     networked();
@@ -224,6 +224,8 @@ function launchPage() {
         
 
 		initPage();
+
+        load_config();
 
 	} else {
 		setTimeout(launchPage, 300); // try again in 300 milliseconds
