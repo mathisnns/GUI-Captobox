@@ -1,8 +1,8 @@
 {
     "Name" : "Captobox-1",
     "Mode" : true,
-    "SSID" : "Livebox-F510",
-    "Password" : "dTMMAZpvSdchHFDYJu",
+    "SSID" : "Livebox-Debrouillarde",
+    "Password" : "",
     "Canal" : 6,
     "IPAddress" : "192.168.1.1",
     "Debug" : false
