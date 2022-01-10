@@ -94,7 +94,7 @@ function send_ssid() {
 }
 
 function scan() {
-    xh_serveur.open("GET", "/scan.json", true);
+    xh_serveur.open("GET", "scan.json", true);
     xh_serveur.onreadystatechange = function() {
         if (xh_serveur.readyState == 4) {
             if (xh_serveur.status == 200) {
