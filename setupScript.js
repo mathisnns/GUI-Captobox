@@ -156,7 +156,7 @@ function write_config() {
             var canal = document.getElementById('canal').value;
             var name = document.getElementById('name').value;
             var ip = document.getElementById('ip').value;
-            var post_config = '/write?name=' + name + '&mode=' + mode + '&ssid=' + ssid + '&mdp=' + mdp + '&canal=' + canal + '&ip=' + ip;
+            var post_config = 'write?name=' + name + '&mode=' + mode + '&ssid=' + ssid + '&mdp=' + mdp + '&canal=' + canal + '&ip=' + ip;
             xh_serveur.open("GET", post_config, true);
             xh_serveur.onreadystatechange = function() {
 
@@ -171,7 +171,7 @@ function write_config() {
             var canal = document.getElementById('canal').value;
             var name = document.getElementById('name').value;
             var ip = document.getElementById('ip').value;
-            var post_config = '/write?name=' + name + '&mode=' + mode + '&ssid=' + ssid + '&mdp=' + mdp + '&canal=' + canal + '&ip=' + ip;
+            var post_config = 'write?name=' + name + '&mode=' + mode + '&ssid=' + ssid + '&mdp=' + mdp + '&canal=' + canal + '&ip=' + ip;
             xh_serveur.open("GET", post_config, true);
             xh_serveur.onreadystatechange = function() {
 
@@ -182,7 +182,7 @@ function write_config() {
 }
 
 function load_config() {
-    xh_serveur.open("GET", "/config.json", true);
+    xh_serveur.open("GET", "config.json", true);
     xh_serveur.onreadystatechange = function() {
         if (xh_serveur.readyState == 4) {
             if (xh_serveur.status == 200) {
