@@ -182,7 +182,7 @@ function write_config() {
 }
 
 function load_config() {
-    xh_serveur.open("GET", "http://192.168.1.18/config.json", true);
+    xh_serveur.open("GET", "/config.json", true);
     xh_serveur.onreadystatechange = function() {
         if (xh_serveur.readyState == 4) {
             if (xh_serveur.status == 200) {
